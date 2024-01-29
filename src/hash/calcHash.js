@@ -12,8 +12,7 @@ const calculateHash = async () => {
 
     const transformStream = new stream.Transform({
         transform(chunk, encoding, callback) {
-            this.push(hash.update(chunk).digest('hex'));
-            callback();
+            callback(null, hash.update(chunk).digest('hex'));
         },
     });
     readableStream.pipe(transformStream).pipe(process.stdout);
