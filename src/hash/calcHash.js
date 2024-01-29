@@ -1,5 +1,22 @@
+import path from 'path';
+import fs from 'fs';
+import crypto from 'crypto';
+import stream from 'stream';
+
 const calculateHash = async () => {
-    // Write your code here 
+
+    const fileName = path.join('files', 'fileToCalculateHashFor.txt');
+    const readableStream = fs.createReadStream(fileName);
+
+    const hash = crypto.createHash('sha256');
+
+    const transformStream = new stream.Transform({
+        transform(chunk, encoding, callback) {
+            this.push(hash.update(chunk).digest('hex'));
+            callback();
+        },
+    });
+    readableStream.pipe(transformStream).pipe(process.stdout);
 };
 
 await calculateHash();

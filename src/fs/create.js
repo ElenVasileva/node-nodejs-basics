@@ -1,8 +1,9 @@
+import path from 'node:path';
 import fs from 'node:fs/promises';
 
 const create = async () => {
 
-    const fileName = 'files/fresh.txt';
+    const fileName = path.join('files', 'fresh.txt');
     const text = 'I am fresh and young';
 
     try {

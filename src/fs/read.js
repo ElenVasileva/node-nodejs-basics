@@ -1,8 +1,9 @@
+import path from 'node:path';
 import fs from 'node:fs';
 
 const read = async () => {
 
-    const fileToRead = 'files/fileToRead.txt';
+    const fileToRead = path.join('files', 'fileToRead.txt');
 
     if (!fs.existsSync(fileToRead)) {
         throw new Error('FS operation failed');
